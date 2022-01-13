@@ -26,90 +26,55 @@
     -->
     <title>React App</title>
     <style>
-      html,
-      body,
-      #viewDiv {
+      html, body, #viewDiv {
         padding: 0;
         margin: 0;
         height: 100%;
         width: 100%;
       }
-  </style>
+    </style>
     <link rel="stylesheet" href="https://js.arcgis.com/4.22/esri/themes/light/main.css">
     <script src="https://js.arcgis.com/4.22/"></script>
-
-
+  
     <script>
-        require(["esri/config",
-                "esri/Map",
-                "esri/layers/VectorTileLayer", 
-                "esri/views/MapView",
-                "esri/widgets/BasemapToggle",
-                "esri/widgets/BasemapGallery",
-                "esri/layers/FeatureLayer"
-                ], function (esriConfig,Map,VectorTileLayer,MapView,BasemapToggle,BasemapGallery,FeatureLayer) {
-           
-                  
-                esriConfig.apiKey = "AAPKa6c4ae07d21d425ba112371ed5f53df3L_XRvL7jvtTAYHb0s6wW8W9Ej5S7KSiwBHaAWJliTUaSArbVAOTVhYYrPe6URclm";
-
-            const map = new Map({
-              basemap: "arcgis-topographic",// Basemap layer service
-        
-                 });
-
-             const view = new MapView({
-          map: map,
-          center: [38.75547357626586,8.976715454581594], // Longitude, latitude
-          zoom: 13, // Zoom level
-          container: "viewDiv" // Div element
-        }); 
-         // Define a pop-up for Trailheads
-      const popupPlaces = {
-        "title": "Places",
-        "content": "<b> {NAME}<br>"
-      }
-        const placesRenderer = {
-            "type": "simple",
-            "symbol": {
-              "type": "picture-marker",
-              "url": "http://static.arcgis.com/images/Symbols/NPS/npsPictograph_0231b.png",
-              "width": "18px",
-              "height": "18px"
-            }
+      require([
+        "esri/config",
+        "esri/WebMap",
+        "esri/views/MapView",
+        "esri/widgets/ScaleBar",
+        "esri/widgets/Legend"
+  
+      ], function(esriConfig, WebMap, MapView, ScaleBar, Legend) {
+  
+        esriConfig.apiKey = "AAPKa6c4ae07d21d425ba112371ed5f53df3L_XRvL7jvtTAYHb0s6wW8W9Ej5S7KSiwBHaAWJliTUaSArbVAOTVhYYrPe6URclm";
+  
+        const webmap = new WebMap({
+          portalItem: {
+            id: "4c87cece10ca40979413edfb7bc62131"
           }
-          const palcesLabels = {
-            symbol: {
-              type: "text",
-              color: "#FFFFFF",
-              haloColor: "#5E8D74",
-              haloSize: "2px",
-              font: {
-                size: "12px",
-                family: "Noto Sans",
-                style: "italic",
-                weight: "normal"
-              }
-            },
-    
-            labelPlacement: "above-center",
-            labelExpressionInfo: {
-              expression: "$feature.Name"
-            }
-          };
-          const places = new FeatureLayer({
-            url:"https://services5.arcgis.com/NubHLw9hMvGOdNsf/arcgis/rest/services/places/FeatureServer/0" ,
-            outFields: ["Name"],
-            popupTemplate: popupPlaces
-          });
-    
-          map.add(places,0);
-            // Create the layer and set the renderer
-    
-
-
         });
-     
-      </script>
+  
+        const view = new MapView({
+          container: "viewData",
+          map: webmap
+  
+        });
+  
+        const scalebar = new ScaleBar({
+          view: view
+        });
+  
+        view.ui.add(scalebar, "bottom-left");
+  
+        const legend = new Legend ({
+          view: view
+        });
+        view.ui.add(legend, "top-right");
+
+        
+  
+    });
+    </script>
 
   </head>
   <body>

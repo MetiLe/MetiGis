@@ -19,12 +19,14 @@ app.use(express.json());
 PlaceRoute = require("./routes/placesroute");
 CommentRoute = require("./routes/commentRoute");
 RatingRoute = require("./routes/ratingRoute");
-UserRoute = require("./routes/authRoute")
+UserRoute = require("./routes/authRoute");
+FavouriteModel=require("./routes/favouriteRoute");
 
 app.use('/api/comment', CommentRoute);
 app.use('/api/place', PlaceRoute);
 app.use('/api/rating', RatingRoute);
 app.use('/api/auth', UserRoute);
+app.use('/api/favourite',FavouriteModel);
 
 
 const DB_URI = "mongodb+srv://webgis:webgis@webgis.pqnpp.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
