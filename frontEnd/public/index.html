@@ -24,11 +24,98 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>Addis Tour</title>
+    <title>React App</title>
+    <style>
+      html,
+      body,
+      #viewDiv {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        width: 100%;
+      }
+  </style>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.22/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.22/"></script>
+
+
+    <script>
+        require(["esri/config",
+                "esri/Map",
+                "esri/layers/VectorTileLayer", 
+                "esri/views/MapView",
+                "esri/widgets/BasemapToggle",
+                "esri/widgets/BasemapGallery",
+                "esri/layers/FeatureLayer"
+                ], function (esriConfig,Map,VectorTileLayer,MapView,BasemapToggle,BasemapGallery,FeatureLayer) {
+           
+                  
+                esriConfig.apiKey = "AAPKa6c4ae07d21d425ba112371ed5f53df3L_XRvL7jvtTAYHb0s6wW8W9Ej5S7KSiwBHaAWJliTUaSArbVAOTVhYYrPe6URclm";
+
+            const map = new Map({
+              basemap: "arcgis-topographic",// Basemap layer service
+        
+                 });
+
+             const view = new MapView({
+          map: map,
+          center: [38.75547357626586,8.976715454581594], // Longitude, latitude
+          zoom: 13, // Zoom level
+          container: "viewDiv" // Div element
+        }); 
+         // Define a pop-up for Trailheads
+      const popupPlaces = {
+        "title": "Places",
+        "content": "<b> {NAME}<br>"
+      }
+        const placesRenderer = {
+            "type": "simple",
+            "symbol": {
+              "type": "picture-marker",
+              "url": "http://static.arcgis.com/images/Symbols/NPS/npsPictograph_0231b.png",
+              "width": "18px",
+              "height": "18px"
+            }
+          }
+          const palcesLabels = {
+            symbol: {
+              type: "text",
+              color: "#FFFFFF",
+              haloColor: "#5E8D74",
+              haloSize: "2px",
+              font: {
+                size: "12px",
+                family: "Noto Sans",
+                style: "italic",
+                weight: "normal"
+              }
+            },
+    
+            labelPlacement: "above-center",
+            labelExpressionInfo: {
+              expression: "$feature.Name"
+            }
+          };
+          const places = new FeatureLayer({
+            url:"https://services5.arcgis.com/NubHLw9hMvGOdNsf/arcgis/rest/services/places/FeatureServer/0" ,
+            outFields: ["Name"],
+            popupTemplate: popupPlaces
+          });
+    
+          map.add(places,0);
+            // Create the layer and set the renderer
+    
+
+
+        });
+     
+      </script>
+
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
+    <div id="viewDiv"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

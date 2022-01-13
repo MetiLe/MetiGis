@@ -5,6 +5,7 @@ import Footer from './components/Footer'
 import Home from './components/Home'
 import About from './components/About'
 import Recommend from './components/Recommend'
+import Map from './components/Map'
 
 function App() {
   return (

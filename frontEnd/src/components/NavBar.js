@@ -35,6 +35,9 @@ function NavBar() {
           <li>
             <a href="#reviews">Reviews</a>
           </li>
+          <li>
+            <a href="#map">Map</a>
+          </li>
         </ul>
         <div className='profile'></div>
       </Nav>
@@ -57,6 +60,11 @@ function NavBar() {
           </li>
           <li>
             <a href="#reviews" onClick={() => setNavbarState(false)}>
+              Reviews
+            </a>
+          </li>
+          <li>
+            <a href="#map" onClick={() => setNavbarState(false)}>
               Reviews
             </a>
           </li>
