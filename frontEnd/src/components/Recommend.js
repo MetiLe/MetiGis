@@ -1,76 +1,71 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import styled from "styled-components";
-import Destination1 from "../assets/Destination1.png";
-import info1 from "../assets/info1.png";
-import info2 from "../assets/info2.png";
-import info3 from "../assets/info3.png";
+
+
 
 function Recommend() {
 
-    const data = [
-        {
-            image: Destination1,
-            title: "Singapore",
-            subTitle: "Singapore, officialy thr Republic of Singapore, is a",
-            cost: "38,800",
-            duration: "Approx 2 night trip",
-        },
-    ]
+  // const places = [
+  //   {
+  //     image: Destination1,
+  //     name: "Entoto",
+  //     subcity: "Shiro meda",
+  //     // cost: "38,800",
+  //     // duration: "Approx 2 night trip",
+  //   },
+  // ]
 
 
-    const packages = [
-        "The Weekend Break",
-        "The Package Holiday",
-        "The Group Tour",
-        "Long Term Slow Travel",
-    ];
 
-    const [active, setActive] = useState(1);
+  const [places, setPlaces] = useState(null);
 
-    return (
-        <Section id="recommend">
-            <div className="title">
-                <h2>Recommended Destinations</h2>
+  useEffect(() => {
+    fetch('http://localhost:3000/api/place')
+      .then(res => {
+        return res.json();
+      }).then(data => {
+        setPlaces(data.data)
+        console.log(data.data)
+      })
+  }, [])
+
+  return (
+    <Section id="recommend">
+      <div className="title">
+        <h1>Recommended Places</h1>
+        <br />
+        <br />
+        <br />
+
+      </div>
+      <div className="destinations">
+
+        {places && places.map((place) => {
+          return (
+            <div className="destination">
+              <img src={require(`../assets/${place.image[0]}`)} alt="" />
+              {/* <p>{place.image[0]}</p> */}
+              <h3>{place.name}</h3>
+              <p>{place.subcity}</p>
+              <p>{place.descriotion}</p>
+              <div className="info">
+                <div className="services">
+                  <p>Rating ui</p>
+                </div>
+                {/* <h4>{destination.cost}</h4> */}
+              </div>
+              {/* <div className="distance">
+                <span>1000 Kms</span>
+                <span>{destination.duration}</span>
+              </div> */}
             </div>
-            <div className="packages">
-                <ul>
-                    {packages.map((pkg, index) => {
-                        return (
-                            <li
-                                className={active === index + 1 ? "active" : ""}
-                                onClick={() => setActive(index + 1)}
-                            >
-                                {pkg}
-                            </li>
-                        );
-                    })}
-                </ul>
-            </div>
-            <div className="destinations">
-                {data.map((destination) => {
-                    return (
-                        <div className="destination">
-                            <img src={destination.image} alt="" />
-                            <h3>{destination.title}</h3>
-                            <p>{destination.subTitle}</p>
-                            <div className="info">
-                                <div className="services">
-                                    <img src={info1} alt="" />
-                                    <img src={info2} alt="" />
-                                    <img src={info3} alt="" />
-                                </div>
-                                <h4>{destination.cost}</h4>
-                            </div>
-                            <div className="distance">
-                                <span>1000 Kms</span>
-                                <span>{destination.duration}</span>
-                            </div>
-                        </div>
-                    );
-                })}
-            </div>
-        </Section>
-    )
+          );
+        })}
+
+
+      </div>
+    </Section>
+  )
 }
 
 const Section = styled.section`

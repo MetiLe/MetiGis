@@ -21,6 +21,10 @@ const PlacesSchema = mongoose.Schema({
             required: false
         }
     ],
+    category: {
+        type: String,
+        required: false
+    },
     ratings: [
         {
             type: mongoose.Schema.Types.ObjectId,
