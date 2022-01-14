@@ -27,7 +27,7 @@
     <title>React App</title>
     <style>
       html, body, #viewDiv {
-        padding: 0 25px;
+        padding: 0.5rem 2rem 0.5rem 0.25rem;
         margin: 0;
         height: 100%;
         width: 100%;
@@ -36,7 +36,7 @@
     <link rel="stylesheet" href="https://js.arcgis.com/4.22/esri/themes/light/main.css">
     <script src="https://js.arcgis.com/4.22/"></script>
   
-    <script>
+     <script>
       require([
         "esri/config",
         "esri/WebMap",
@@ -55,7 +55,7 @@
         });
   
         const view = new MapView({
-          container: "viewData",
+          container: "viewDiv",
           map: webmap
   
         });
@@ -74,13 +74,13 @@
         
   
     });
-    </script>
+    </script> 
 
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <div id="viewDiv"></div>
+    <div id="viewDiv" style="padding: 50px 100px;"></div>
     <!--
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.

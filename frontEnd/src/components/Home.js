@@ -12,9 +12,8 @@ function Home() {
         <div className="title">
           <h1>TRAVEL TO EXPLORE</h1>
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere
-            natus, enim ipsam magnam odit deserunt itaque? Minima earum velit
-            tenetur!
+            Addis Ababa is one of the fastest growing cities in Africa and as you can see it is well worth
+            spending a day or two there before heading out to explore the rest of Ethiopia.
           </p>
         </div>
         <div className="search">
