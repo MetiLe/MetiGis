@@ -1,72 +1,117 @@
-import React, { useState, useEffect } from 'react'
+// import React, { useEffect } from 'react'
+import React, { Component } from 'react';
 import styled from "styled-components";
 
-
-
-function Recommend() {
-
-  // const places = [
-  //   {
-  //     image: Destination1,
-  //     name: "Entoto",
-  //     subcity: "Shiro meda",
-  //     // cost: "38,800",
-  //     // duration: "Approx 2 night trip",
-  //   },
-  // ]
+import RecommendList from './RecommendList';
 
 
 
-  const [places, setPlaces] = useState(null);
 
-  useEffect(() => {
+
+class Recommend extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      active: 1,
+      places: [],
+      toggle: [],
+      cat: "",
+      packages: [
+        "Park",
+        "Museum",
+        "Other",
+      ]
+    }
+  }
+
+
+
+
+  // const [active, setActive] = useState(1);
+  // const [toggle, setToggle] = useState();
+  // const [places, setPlaces] = useState(null);
+
+  componentWillMount() {
     fetch('http://localhost:3000/api/place')
       .then(res => {
         return res.json();
       }).then(data => {
-        setPlaces(data.data)
-        console.log(data.data)
+        const arr = []
+        data.data.map(place => {
+          if (place.category === 'Park') {
+            arr.push(place)
+            this.setState({
+              toggle: arr
+            })
+          }
+        })
+
+        this.setState({
+          places: data.data
+        })
+        console.log(this.state.places)
+        console.log(this.state.packages)
       })
-  }, [])
-
-  return (
-    <Section id="recommend">
-      <div className="title">
-        <h1>Recommended Places</h1>
-        <br />
-        <br />
-        <br />
-
-      </div>
-      <div className="destinations">
-
-        {places && places.map((place) => {
-          return (
-            <div className="destination">
-              <img src={require(`../assets/${place.image[0]}`)} alt="" />
-              {/* <p>{place.image[0]}</p> */}
-              <h3>{place.name}</h3>
-              <p>{place.subcity}</p>
-              <p>{place.descriotion}</p>
-              <div className="info">
-                <div className="services">
-                  <p>Rating ui</p>
-                </div>
-                {/* <h4>{destination.cost}</h4> */}
-              </div>
-              {/* <div className="distance">
-                <span>1000 Kms</span>
-                <span>{destination.duration}</span>
-              </div> */}
-            </div>
-          );
-        })}
+  }
 
 
-      </div>
-    </Section>
-  )
+  render() {
+    return (
+      <Section id="recommend">
+
+        <div className="title">
+          <h1>Recommended Places</h1>
+          <br />
+          <br />
+          <br />
+
+        </div>
+
+
+        <div className="packages">
+
+          <ul>
+
+            {this.state.packages.map((pkg, index) => {
+              return <li
+                key={index}
+                className={this.state.active === index + 1 ? "active" : ""}
+
+                onClick={() => this.display(pkg, index)}
+              >
+                {pkg}
+              </li>
+
+            })}
+          </ul>
+        </div>
+
+
+        <RecommendList places={this.state.toggle} />
+
+
+
+      </Section>
+    )
+
+  }
+  display(pkg, index) {
+    const arr = []
+    this.state.places.map(place => {
+      if (place.category === pkg) {
+        arr.push(place);
+      }
+    })
+    this.setState({
+      toggle: arr,
+      active: index + 1
+    })
+
+  }
+
 }
+
+
 
 const Section = styled.section`
   padding: 2rem 0;
@@ -76,14 +121,15 @@ const Section = styled.section`
   .packages {
     display: flex;
     justify-content: center;
-    margin: 2rem 0;
+    margin: 1rem 0;
     ul {
       display: flex;
       list-style-type: none;
       width: max-content;
       li {
-        padding: 1rem 2rem;
+        padding: 0.5rem 7rem;
         border-bottom: 0.1rem solid black;
+        font-size: 20px;
       }
       .active {
         border-bottom: 0.5rem solid #8338ec;
@@ -133,6 +179,19 @@ const Section = styled.section`
       }
     }
   }
+  .subcity{
+    font-family: italic;
+  }
+  .icon{
+    color: #0077b6;
+    font-size: 24px;
+    margin: 10px 0 -5px 0;
+  }
+  .star{
+    color: #FFD700;
+    font-size: 24px;
+    margin: 10px 0;
+  }
   @media screen and (min-width: 280px) and (max-width: 768px) {
     .packages {
       ul {
@@ -155,3 +214,6 @@ const Section = styled.section`
 
 
 export default Recommend
+
+
+
