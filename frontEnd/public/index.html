@@ -42,15 +42,20 @@
         "esri/WebMap",
         "esri/views/MapView",
         "esri/widgets/ScaleBar",
-        "esri/widgets/Legend"
+        "esri/widgets/Legend",
+        "esri/widgets/Search",
+        "esri/widgets/Locate",
+        "esri/widgets/Track",
+        "esri/Graphic",
+        "esri/widgets/Fullscreen"
   
-      ], function(esriConfig, WebMap, MapView, ScaleBar, Legend) {
+      ], function(esriConfig, WebMap, MapView, ScaleBar, Legend,Search,Locate,Track,Graphic,Fullscreen) {
   
         esriConfig.apiKey = "AAPKa6c4ae07d21d425ba112371ed5f53df3L_XRvL7jvtTAYHb0s6wW8W9Ej5S7KSiwBHaAWJliTUaSArbVAOTVhYYrPe6URclm";
   
         const webmap = new WebMap({
           portalItem: {
-            id: "4c87cece10ca40979413edfb7bc62131"
+            id: "d4c646a34417480cb4e67c322206d939"
           }
         });
   
@@ -65,12 +70,47 @@
         });
   
         view.ui.add(scalebar, "bottom-left");
-  
-        const legend = new Legend ({
+
+        fullscreen = new Fullscreen({
           view: view
         });
-        view.ui.add(legend, "top-right");
-
+        view.ui.add(fullscreen, "top-right");
+  
+        const legend = new Legend ({
+          view: view,
+          width:"2px",
+        });
+        view.ui.add(legend, "bottom-right");
+        const search = new Search({  //Add Search widget
+           view: view
+        });
+        view.ui.add(search, "top-right");
+        const locate = new Locate({
+          view: view,
+          useHeadingEnabled: false,
+          goToOverride: function(view, options) {
+            options.target.scale = 1500;
+            return view.goTo(options.target);
+          }
+        });
+        view.ui.add(locate, "top-left");
+        const track = new Track({
+          view: view,
+          graphic: new Graphic({
+            symbol: {
+              type: "simple-marker",
+              size: "12px",
+              color: "green",
+              outline: {
+                color: "#efefef",
+                width: "1.5px"
+              }
+            }
+          }),
+          useHeadingEnabled: false
+        });
+        view.ui.add(track, "top-left");
+              
         
   
     });
