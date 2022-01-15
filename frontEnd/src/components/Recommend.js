@@ -1,7 +1,6 @@
 // import React, { useEffect } from 'react'
 import React, { Component } from 'react';
 import styled from "styled-components";
-
 import RecommendList from './RecommendList';
 
 

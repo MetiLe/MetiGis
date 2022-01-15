@@ -43,7 +43,7 @@ module.exports ={
         }).catch(err =>{
             res.status(500).json({
                 message: "failed posting",
-                error: result
+                error: err
             })
         })
         }
