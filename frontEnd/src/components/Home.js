@@ -10,20 +10,13 @@ function Home() {
       </div>
       <div className="content">
         <div className="title">
-          <h1>TRAVEL TO EXPLORE</h1>
+          <h1>TRAVEL TO ADDIS</h1>
           <p>
             Addis Ababa is one of the fastest growing cities in Africa and as you can see it is well worth
             spending a day or two there before heading out to explore the rest of Ethiopia.
           </p>
         </div>
-        <div className="search">
-          <div className="container">
-            <label htmlFor="">What do you want to see</label>
-            <input type="text" placeholder="" />
-          </div>
-
-          <button>Search</button>
-        </div>
+       
       </div>
     </Section>
   )
@@ -114,10 +107,6 @@ const Section = styled.section`
         background-color: #0077b6;
         font-size: 1.1rem;
        
-        transition: 0.3s ease-in-out;
-        &:hover {
-          background-color: #023e8a;
-        }
       }
     }
   }

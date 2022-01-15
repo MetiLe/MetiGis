@@ -147,11 +147,7 @@ const Section = styled.section`
       gap: 0.5rem;
       background-color: #8338ec14;
       border-radius: 1rem;
-      transition: 0.3s ease-in-out;
-      &:hover {
-        transform: translateX(0.4rem) translateY(-1rem);
-        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-      }
+     
       img {
         width: 100%;
       }
