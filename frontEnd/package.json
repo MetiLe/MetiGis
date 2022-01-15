@@ -11,6 +11,7 @@
     "react-icons": "^4.3.1",
     "react-router-dom": "^5.3.0",
     "react-scripts": "5.0.0",
+    "react-star-rating-component": "^1.4.1",
     "scrollreveal": "^4.0.9",
     "styled-components": "^5.3.3",
     "web-vitals": "^2.1.2"
@@ -38,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-star-rating-component": "^1.4.1"
   }
 }
