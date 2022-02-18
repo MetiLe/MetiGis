@@ -35,9 +35,7 @@ function NavBar() {
           <li>
             <a href="#reviews">Reviews</a>
           </li>
-          <li>
-            <a href="#map">Map</a>
-          </li>
+        
         </ul>
         <div className='profile'></div>
       </Nav>

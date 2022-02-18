@@ -24,13 +24,13 @@ function About() {
             icon: service3,
             title: "Flexible Payment",
             subTitle:
-                " Enjoy the flexible payment through our app and get rewards on every payment.",
+                " Enjoy the flexible payment through apps and get rewards on every payment.",
         },
         {
             icon: service4,
             title: "Find The Best Near You",
             subTitle:
-                "Find the best hotels and places to visit near you in a single click.",
+                "Find the best hotels and places to visit near you .",
         },
     ];
 
